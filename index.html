@@ -1,0 +1,678 @@
+<!DOCTYPE html> <!--告诉浏览器这是一个 HTML5 页面-->
+<html>  <!--网页的所有内容都在html中-->
+
+<head>  <!--网页的设置-->
+    <!-- Google 分析工具代码 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-55V1E709SK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-55V1E709SK');
+    </script>
+    <!--网页设置部分-->
+    <meta charset="utf-8">
+    <meta name="description"
+          content="Triadic Positional Encoding for Point Clouds with Multi-Scale, Local, and Relative Embeddings">
+    <meta name="keywords"
+          content="Point Cloud, Positional Encoding, Relative Position, Multi-Scale, Local Geometry, Relative Positional Encoding">
+    <meta name="viewport" content="width=device-width, initial-scale=1">  <!--手机显示设置-->
+    <title>PointTriPE: Triadic Positional Encoding for Point Clouds with Multi-Scale, Local, and Relative Embeddings
+    </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/xxxxx"></script>
+    <!--比如有多少人访问了你的网站，他们点击了什么,把后面收集到的数据都关联到这个项目上-->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+    <!--给网页加载一个 CSS static文件字体，滚动....-->
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <!--给网页引入 JavaScript 脚本，用于添加交互功能，比如按钮点击、图片轮播、滑动条等行为文件-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+    <script src="./static/js/script.js"></script>
+
+</head>
+
+
+<!--下面开始正文-->
+<body>
+<section class="hero"><!-- Bulma 的 hero 区块，通常用于顶部主视觉区域 -->
+    <div class="hero-body"><!-- 内容主体 -->
+        <div class="container is-max-desktop"><!-- 设置最大宽度的容器 -->
+            <div class="columns is-centered"> <!-- 水平居中列 -->
+                <div class="column has-text-centered"><!-- 单列 + 文本居中 -->
+                    <h1 class="title is-1 publication-title">
+                        <span style="color: #4CAF50 ;font-weight: bolder;"></span>
+                        PointGAA: Learning Feature-Conditioned Pseudo-Coordinates for Point Cloud Attention
+                    </h1><!--题目信息-->
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"> <a href="">Anonymous</a> </span>
+                    </div>
+
+                    <!-- TODO: update paper and video link once upload -->
+
+                    <!--这块代码的作用是展示两个按钮链接：一个是论文PDF，一个是代码GitHub-->
+                    <div class="column has-text-centered">
+                        <span class="link-block">
+                    <a class="external-link button is-normal is-rounded is-dark"
+                       style="pointer-events: none; cursor: default;">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>The paper will be released</span>
+                  </a>
+                  </span>
+                        <!-- Code Link. -->
+                        <span class="link-block">
+                    <!-- href="https://github.com/"-->
+                    <a class="external-link button is-normal is-rounded is-dark"
+                       style="pointer-events: none; cursor: default;">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>The code will be released</span>
+                    </a>
+                  </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Overview</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Attention mechanisms have achieved remarkable success across various domains, yet positional
+                        information is often treated as auxiliary. For point clouds, local geometric relationships are
+                        crucial for guiding attention. We propose PointGAA, a Geo-Augmented Attention module
+                        that learns feature-conditioned pseudo-coordinates and integrates them with projected relative
+                        coordinates, allowing attention to adaptively fuse semantic and geometric cues. Additionally, a
+                        Neighborhood Context Aggregator captures local context and injects it into attention logits,
+                        enhancing discriminability. Extensive experiments on ScanObjectNN (classification), ShapeNetPart
+                        (part segmentation), and S3DIS (semantic segmentation) demonstrate that PointGAA consistently
+                        improves accuracy and robustness over strong baselines.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Abstract. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Motivation</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        To better quantify the relative importance of semantic features and positional cues for
+                        attention, we conducted a study on the ModelNet40\cite{Modelnet40} classification benchmark.
+                        When attention coefficients are computed solely from feature similarity, the model achieves a
+                        classification accuracy of $92.0\%$, whereas using only positional information yields a higher
+                        accuracy of $93.3\%$. We further experimented with a learnable linear weighting that combines
+                        feature-driven and position-driven attention logits. After training, the learned weight assigns
+                        greater importance to the position-based term than to the feature-based term, as illustrated in
+                        Fig.~\ref{fig:2}. This result indicates that, for point clouds, positional cues play a more
+                        significant role in determining attention coefficients than semantic features—a characteristic
+                        not shared by image or text data, where local features vary but pixel or token positions remain
+                        constant.
+                        This observation indicates that geometric cues can provide more discriminative signals than
+                        feature similarity alone for neighborhood selection in point clouds. Motivated by this finding,
+                        we propose PointGAA, which learns feature-conditioned pseudo-coordinates and adaptively fuses
+                        them with raw relative positions to enable a tighter, data-driven integration of geometry and
+                        semantics in attention computation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                    <div style="text-align: center;">
+                        <img src="./dynamic/result/image1.png"
+                             style="max-width: 50%; height: auto; display: inline-block;">
+                    </div>
+                    <p><strong>Comparison of local feature and positional information in images and point
+                        clouds. </strong>
+                        Left: Pixel positions lie on a regular grid and are identical across local patches (a uniform
+                        pixel structure).
+                        Right: Point coordinates inherently encode strong local semantic and geometric cues(non-uniform
+                        spatial arrangement). Thus, positional information in point-cloud processing should not be
+                        treated merely as an auxiliary feature — jointly modeling positions and point features more
+                        effectively guides neighbor selection and feature aggregation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                    <div style="text-align: center;">
+                        <img src="./dynamic/result/image2.png"
+                             style="max-width: 50%; height: auto; display: inline-block;">
+                    </div>
+                    <p><strong>Comparison of learned feature and positional weights. </strong>
+                        We further experimented with a learnable linear weighting that combines feature-driven and
+                        position-driven attention logits. After training, the learned weight assigns greater importance
+                        to the position-based term than to the feature-based term, as illustrated in Fig.~\ref{fig:2}.
+                        This result indicates that, for point clouds, positional cues play a more significant role in
+                        determining attention coefficients than semantic features—a characteristic not shared by image
+                        or text data, where local features vary but pixel or token positions remain constant.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Concurrent Work. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3">Method Overview</h2>
+                <div class="content has-text-justified">
+                    <img src="./dynamic/result/framework.png">
+                    <p><strong>Overall architecture of PointGAA. </strong> We adopt a U-Net–style
+                        encoder–decoder architecture to support both classification and segmentation tasks.
+                        In the encoder, a Feature Transformation module first performs dimensionality reduction or
+                        expansion of point features, followed by downsampling via farthest point sampling.
+                        Next, the Spatial Encoding module encodes positional information for each point and fuses it
+                        with feature descriptors, thereby enriching local representations.
+                        Crucially, at every Local Aggregation stage in the encoder, our proposed PointGAA
+                        module is applied to jointly model semantic and geometric information, enhancing attention-based
+                        feature aggregation.
+                        The decoder progressively restores spatial resolution using nearest-neighbor interpolation and
+                        feature propagation.
+                        Finally, task-specific heads are employed for segmentation and classification.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                    <h2 class="title is-3 has-text-centered">Experiments</h2>
+                    <p>We evaluate our model on five widely-used point cloud benchmarks spanning three
+                        representative tasks. For shape
+                        classification, we use ModelNet40 and ScanObjectNN; for part segmentation, ShapeNetPart; and
+                        for indoor scene semantic segmentation, S3DIS.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <div class="content has-text-justified">
+                    <div class="content has-text-centered">
+                        <p><strong>Network configurations used for different datasets.</strong></p>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <thead>
+                            <tr>
+                                <th>Dataset</th>
+                                <th>Dimension</th>
+                                <th>Points</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>ScanObjectNN</td>
+                                <td>96-192-384</td>
+                                <td>64-256-1024</td>
+                            </tr>
+                            <tr>
+                                <td>ModelNet40</td>
+                                <td>96-192-384</td>
+                                <td>64-256-1024</td>
+                            </tr>
+                            <tr>
+                                <td>ShapeNetPart</td>
+                                <td>96-192-320-512</td>
+                                <td>64-192-512-2048</td>
+
+                            </tr>
+                            <tr>
+                                <td>ScanNet v2</td>
+                                <td>64-96-160-288-512</td>
+                                <td>--</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered">
+            <div class="column">
+                <div class="content has-text-centered">
+                    <p><strong>Classification results on ModelNet40</strong></p>
+                    <p><small>OA: overall accuracy. mAcc: mean per-class accuracy.</small></p>
+                </div>
+                <table class="table is-bordered is-striped is-fullwidth is-hoverable">
+                    <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>OA (%)</th>
+                        <th>mAcc (%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>PointNet</td>
+                        <td>89.2</td>
+                        <td>86.0</td>
+                    </tr>
+                    <tr>
+                        <td>PointNet++</td>
+                        <td>93.0</td>
+                        <td>90.7</td>
+                    </tr>
+                    <tr>
+                        <td>DGCNN</td>
+                        <td>92.9</td>
+                        <td>90.2</td>
+                    </tr>
+                    <tr>
+                        <td>PCT</td>
+                        <td>93.2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PTv1</td>
+                        <td>93.7</td>
+                        <td>90.6</td>
+                    </tr>
+                    <tr>
+                        <td>CurveNet</td>
+                        <td>93.8</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PointMLP</td>
+                        <td>94.1</td>
+                        <td>91.3</td>
+                    </tr>
+                    <tr>
+                        <td>GBNet</td>
+                        <td>93.8</td>
+                        <td>91.0</td>
+                    </tr>
+                    <tr>
+                        <td>PointNeXt</td>
+                        <td>94.0</td>
+                        <td>91.1</td>
+                    </tr>
+                    <tr>
+                        <td>PTv2</td>
+                        <td>94.2</td>
+                        <td>91.6</td>
+                    </tr>
+                    <tr>
+                        <td>DualMLP</td>
+                        <td>93.7</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PointGAA (ours)</strong></td>
+                        <td><strong>94.1</strong></td>
+                        <td><strong>91.7</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Part Segmentation Results on ShapeNetPart -->
+            <div class="column">
+                <div class="content has-text-centered">
+                    <p><strong>Classification results on ScanObjectNN</strong></p>
+                    <p><small>“OA” denotes overall accuracy; “mACC” denotes mean class accuracy.</small></p>
+                </div>
+                <table class="table is-bordered is-striped is-fullwidth is-hoverable">
+                    <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>OA (%)</th>
+                        <th>mACC (%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>PointNet</td>
+                        <td>75.2</td>
+                        <td>71.4</td>
+                    </tr>
+                    <tr>
+                        <td>PointNet++</td>
+                        <td>86.2</td>
+                        <td>84.4</td>
+                    </tr>
+                    <tr>
+                        <td>DGCNN</td>
+                        <td>86.1</td>
+                        <td>84.3</td>
+                    </tr>
+                    <tr>
+                        <td>PointMLP</td>
+                        <td>87.7</td>
+                        <td>86.4</td>
+                    </tr>
+                    <tr>
+                        <td>PointNeXt</td>
+                        <td>88.2</td>
+                        <td>86.8</td>
+                    </tr>
+                    <tr>
+                        <td>SPoTr</td>
+                        <td>88.6</td>
+                        <td>86.8</td>
+                    </tr>
+                    <tr>
+                        <td>point2vec</td>
+                        <td>87.5</td>
+                        <td>86.0</td>
+                    </tr>
+                    <tr>
+                        <td>CurveCloud</td>
+                        <td>89.1</td>
+                        <td>86.5</td>
+                    </tr>
+                    <tr>
+                        <td>KPConvX</td>
+                        <td>89.3</td>
+                        <td>88.1</td>
+                    </tr>
+                    <tr>
+                        <td>PointBERT*</td>
+                        <td>83.1</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PointMAE*</td>
+                        <td>85.2</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>PPT*</td>
+                        <td>89.5</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PointGAA (ours)</strong></td>
+                        <td><strong>89.6</strong></td>
+                        <td><strong>87.2</strong></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <div class="columns is-variable is-8">
+
+            <!-- Part Segmentation Results -->
+            <div class="column">
+                <div class="content">
+                    <p><strong>Part segmentation results (mean IoU %) on ShapeNetPart.</strong><br>
+                        “Ins. mIoU” denotes instance-average mIoU; “Cls. mIoU” denotes class-average
+                        mIoU.
+                    </p>
+                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>Ins. mIoU</th>
+                            <th>Cls. mIoU</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>PointNet</td>
+                            <td>83.7</td>
+                            <td>80.4</td>
+                        </tr>
+                        <tr>
+                            <td>PointNet++</td>
+                            <td>85.1</td>
+                            <td>81.9</td>
+                        </tr>
+                        <tr>
+                            <td>DGCNN</td>
+                            <td>85.2</td>
+                            <td>82.3</td>
+                        </tr>
+                        <tr>
+                            <td>PTv1</td>
+                            <td>86.6</td>
+                            <td>83.7</td>
+                        </tr>
+                        <tr>
+                            <td>AGCN</td>
+                            <td>86.9</td>
+                            <td>85.1</td>
+                        </tr>
+                        <tr>
+                            <td>RSCNN</td>
+                            <td>86.2</td>
+                            <td>84.0</td>
+                        </tr>
+                        <tr>
+                            <td>CurveNet</td>
+                            <td>86.8</td>
+                            <td>84.2</td>
+                        </tr>
+                        <tr>
+                            <td>OTMae3D</td>
+                            <td>86.8</td>
+                            <td>85.1</td>
+                        </tr>
+                        <tr>
+                            <td>PointJEPA</td>
+                            <td>83.9</td>
+                            <td>85.8</td>
+                        </tr>
+                        <tr>
+                            <td>AdaCrossNet</td>
+                            <td>-</td>
+                            <td>85.1</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PointTriPE (ours)</strong></td>
+                            <td><strong>87.2</strong></td>
+                            <td><strong>84.0</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Semantic Segmentation Results -->
+            <div class="column">
+                <div class="content">
+                    <p><strong>Semantic segmentation results on S3DIS Area5.</strong><br>
+                        Mean IoU (%) and ACC (%).
+                    </p>
+                    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <thead>
+                        <tr>
+                            <th>Method</th>
+                            <th>mIoU (%)</th>
+                            <th>mAcc (%)</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>KPConv [22]</td>
+                            <td>67.1</td>
+                            <td>76.5</td>
+                        </tr>
+                        <tr>
+                            <td>PTv1 [5]</td>
+                            <td>70.4</td>
+                            <td>76.4</td>
+                        </tr>
+                        <tr>
+                            <td>SPoTr [23]</td>
+                            <td>70.8</td>
+                            <td>76.8</td>
+                        </tr>
+                        <tr>
+                            <td>PointNeXt [9]</td>
+                            <td>70.5</td>
+                            <td>77.4</td>
+                        </tr>
+                        <tr>
+                            <td>PointMixer [24]</td>
+                            <td>71.4</td>
+                            <td>77.9</td>
+                        </tr>
+                        <tr>
+                            <td>PTv2 [6]</td>
+                            <td>71.6</td>
+                            <td>78.1</td>
+                        </tr>
+                        <tr>
+                            <td>StratTrans [25]</td>
+                            <td>72.0</td>
+                            <td>78.1</td>
+                        </tr>
+                        <tr>
+                            <td>PointVector [26]</td>
+                            <td>72.3</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>PointMetaBase [27]</td>
+                            <td>72.3</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PointGAA (ours)</strong></td>
+                            <td><strong>72.5</strong></td>
+                            <td><strong>77.4</strong></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-variable is-8">
+      <!-- Ablation Study Results -->
+      <div class="column">
+        <div class="content">
+          <div class="content has-text-centered">
+            <p><strong>Ablation study on ShapeNetPart (without voting)</strong></p>
+            <p><small>Metrics are instance mIoU and class mIoU.</small></p>
+          </div>
+          <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>Ins. mIoU (%)</th>
+                <th>Cls. mIoU (%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Baseline</td>
+                <td>85.1</td>
+                <td>82.3</td>
+              </tr>
+              <tr>
+                <td>Feature + NCA</td>
+                <td>85.8</td>
+                <td>83.4</td>
+              </tr>
+              <tr>
+                <td>Position + NCA</td>
+                <td>86.3</td>
+                <td>83.5</td>
+              </tr>
+              <tr>
+                <td>Both + Mean</td>
+                <td>86.0</td>
+                <td>84.2</td>
+              </tr>
+              <tr>
+                <td><strong>Both + NCA</strong></td>
+                <td><strong>86.8</strong></td>
+                <td><strong>84.6</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
